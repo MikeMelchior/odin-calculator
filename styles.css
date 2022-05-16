@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid white;
+}
+
+body, html {
+    height: 100vh; 
+    width: 100vw;
+    display: flex;
+    background-color: rgb(215, 239, 231);
+}
+.root {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    .header h1 {
+        font-size: 45px;
+        font-family: monospace;
+        color: rgb(33, 33, 31);
+    }
+
+.content {
+    flex: 2;
+    display: flex;
+}
+    .left-section {
+        flex: 1;
+    }
+    .calculator-area {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+        .calculator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85%;
+            width: 60%;
+            border-radius: 10px;
+            background-color:  rgb(33, 33, 31);
+        }
+        .display-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 85%;
+            width: 80%;
+            gap: 5%;
+        }
+            .screen {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                height: 18%;
+                width: 90%;
+                background-color: rgb(144, 144, 129);
+            }
+            .buttons-display {
+                flex: 1;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                gap: 5%;
+            }
+                .column {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5%;
+                }
+                    .column button {
+                        flex: 1;
+                        background-color: #cbcbcb;
+                    }
+
+    .right-section {
+        flex: 1;
+    }
+
+.footer {
+    flex: 1;
+}
