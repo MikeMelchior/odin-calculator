@@ -169,6 +169,6 @@ body, html {
     transform: scale(1.4);
 }
 
-.active {
-    opacity: 0.9;
+button.btn.operator.active {
+    opacity: 0.8;
 }
