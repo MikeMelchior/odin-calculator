@@ -1,7 +1,7 @@
-const DEFAULT_COLOR = '#ffffff'
 
 let zoom = false;
 let currentColor = null;
+let displayText = ''
 
 const root = document.querySelector('.root');
 const colorPicker = document.querySelector('#colorPicker');
@@ -11,8 +11,8 @@ const changeCalcColorButton = document.querySelector('#change-calc-color');
 const calcButtons = document.querySelectorAll('.column button');
 const changeButtonColorButton = document.querySelector('#change-button-color');
 const zoomButton = document.querySelector('#zoom');
-
-
+const clearButton = document.querySelector('.clear')
+const display = document.querySelector('#display')
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -36,8 +36,10 @@ const zoomCalc = () => {
         calculator.classList.toggle('zoomed');
 };
 
-
-
+const clearDisplay = () => {
+    displayText = ''
+    display.textContent = ''
+}
 
 changeBackgroundButton.addEventListener('click', setColor);
 changeBackgroundButton.addEventListener('click', changeBackground);
@@ -49,3 +51,5 @@ changeButtonColorButton.addEventListener('click', setColor)
 changeButtonColorButton.addEventListener('click', changeCalcButtons)
 
 zoomButton.addEventListener('click', zoomCalc)
+
+clearButton.addEventListener('click', clearDisplay)
