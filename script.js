@@ -138,7 +138,7 @@ const displayNum = (e) => {
 
 const plusMinus = () => {
     currentNum = +currentNum;
-    currentNum -= currentNum *2;
+    currentNum = -currentNum
     currentNum = currentNum.toString();
     addToDisplay();
 };
