@@ -24,7 +24,7 @@ const clearButton = document.querySelector('.clear')
 const display = document.querySelector('#display')
 const decimalButton = document.querySelector('.decimal')
 const numberButtons = document.querySelectorAll('#number.btn')
-
+const plusMinusButton = document.querySelector('.plus-minus')
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -69,7 +69,7 @@ const divide = (x, y) => {
     answer = x / y;
 };
 
-const sqrt = (x) => {
+const sqrt = () => {
     answer = Math.sqrt(x);
 };
 
@@ -78,16 +78,24 @@ const addDecimal = () => {
         return
     };
     displayText += '.';
-}
+    addToDisplay();
+};
 
 const addToDisplay = () => {
     display.textContent = displayText;
-}
+};
 
 const displayNum = (e) => {
     displayText += e.target.textContent;
-    addToDisplay()
-}
+    addToDisplay();
+};
+
+const plusMinus = () => {
+    displayText = +displayText;
+    displayText -= displayText *2;
+    displayText = displayText.toString();
+    addToDisplay();
+};
 
 
 
@@ -105,8 +113,9 @@ zoomButton.addEventListener('click', zoomCalc)
 clearButton.addEventListener('click', clearDisplay)
 
 decimalButton.addEventListener('click', addDecimal)
-decimalButton.addEventListener('click', addToDisplay)
 
 numberButtons.forEach(button => {
     button.addEventListener('click', displayNum)
 })
+
+plusMinusButton.addEventListener('click', plusMinus)
