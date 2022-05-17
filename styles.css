@@ -59,8 +59,8 @@ body, html {
                 box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 8px;
           }
             #colorPicker {
-                width: 80px;
-                height: 80px;
+                width: 75px;
+                height: 75px;
                 border: none;
                 background-color: rgb(215, 239, 231);
             }
@@ -167,4 +167,8 @@ body, html {
 
 .zoomed {
     transform: scale(1.4);
+}
+
+.active {
+    opacity: 0.9;
 }
