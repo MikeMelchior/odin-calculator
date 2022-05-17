@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    font-family: 'Times New Roman', Times, serif;
 }
 
 body, html {
@@ -24,7 +25,7 @@ body, html {
     align-items: center;
 }
     .header h1 {
-        font-size: 45px;
+        font-size: 4vw;
         font-family: monospace;
         color: rgb(33, 33, 31);
     }
@@ -34,13 +35,56 @@ body, html {
     display: flex;
 }
     .left-section {
-        flex: 1;
+        flex: 2;
+        display: flex;
+        flex-direction: column;
     }
+        .custom-options {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+            input[type='color']::-webkit-color-swatch-wrapper {
+                padding: 0;
+          }
+          
+            input[type='color']::-webkit-color-swatch {
+                border: none;
+                border-radius: 50px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          }
+          
+            input[type='color']::-webkit-color-swatch {
+                border: none;
+                border-radius: 50px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          }
+
+            #colorPicker {
+                margin-right: 13%;
+                width: 80px;
+                height: 80px;
+                border: none;
+                background-color: rgb(215, 239, 231);
+            }
+        .left-section button {
+            width: 40%;
+            padding: 8px 0px;
+            font-size: 1vw;
+            border-radius: 10px;
+        }
+
+
+
+
+
     .calculator-area {
-        flex: 1;
+        flex: 2;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-end;
     }
         .calculator {
             display: flex;
@@ -50,6 +94,7 @@ body, html {
             width: 60%;
             border-radius: 10px;
             background-color:  rgb(33, 33, 31);
+            box-shadow: -3px 3px 10px #4e4e4e;
         }
         .display-area {
             display: flex;
@@ -64,26 +109,38 @@ body, html {
                 align-items: center;
                 justify-content: flex-end;
                 height: 18%;
-                width: 90%;
+                width: 100%;
                 background-color: rgb(144, 144, 129);
+                padding-right: 5%;
+                font-size: 1.5vmax;
+                border-radius: 3px;
             }
             .buttons-display {
                 flex: 1;
                 width: 100%;
                 display: flex;
                 justify-content: space-around;
-                gap: 5%;
+                gap: 2%;
             }
                 .column {
                     flex: 1;
                     display: flex;
                     flex-direction: column;
-                    gap: 5%;
+                    gap: 2%;
                 }
                     .column button {
                         flex: 1;
                         background-color: #cbcbcb;
+                        border-radius: 3px;
+                        opacity: 1;
+                        font-size: 1vw;
                     }
+                    #number {
+                        opacity: 0.7;
+                    }
+                    /* .column button.btn {
+                        background-color: white;
+                    } */
 
     .right-section {
         flex: 1;
