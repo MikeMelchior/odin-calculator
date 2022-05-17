@@ -27,6 +27,7 @@ const numberButtons = document.querySelectorAll('#number.btn')
 const plusMinusButton = document.querySelector('.plus-minus')
 const percentButton = document.querySelector('.percent')
 const sqrtButton = document.querySelector('.sqrt')
+const operators = document.querySelectorAll('button.operator')
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -48,6 +49,15 @@ const changeCalcButtons = () => {
 
 const zoomCalc = () => {
         calculator.classList.toggle('zoomed');
+};
+
+const toggleActive = (e) => {
+    operators.forEach(button => {
+        if (button.classList.length == 4) {
+            button.classList.toggle('active')
+        }});
+    e.target.classList.toggle('active')
+
 };
 
 const clearDisplay = () => {
@@ -135,3 +145,7 @@ plusMinusButton.addEventListener('click', plusMinus);
 percentButton.addEventListener('click', calculatePercent);
 
 sqrtButton.addEventListener('click', calculateSqrt);
+
+operators.forEach(button => {
+    button.addEventListener('click', toggleActive)
+});
