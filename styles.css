@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     /* border: 1px solid white; */
-    font-family: 'Times New Roman', Times, serif;
+    font-family: monospace, 'Times New Roman', Times, serif;
 }
 
 
@@ -27,7 +27,7 @@ body, html {
 }
     .header h1 {
         font-size: 4vw;
-        font-family: monospace;
+        font-family: cursive, monospace;
         color: rgb(33, 33, 31);
     }
 
@@ -71,7 +71,10 @@ body, html {
                 width: 40%;
                 padding: 8px 0px;
                 font-size: 1vw;
+                font-weight: bold;
                 border-radius: 10px;
+                background-color: rgb(186, 245, 226);
+
             }
             .left-section button:hover {
                 transform: scale(1.03);
@@ -114,6 +117,7 @@ body, html {
                 background-color: rgb(144, 144, 129);
                 padding-right: 5%;
                 font-size: 1.5vmax;
+                font-family: monospace;
                 border-radius: 3px;
             }
             .buttons-display {
