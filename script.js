@@ -1,15 +1,15 @@
 
 let zoom = false;
 let currentColor = null;
-let displayText = '';
-let answer = '';
-let insideBrackets = '';
+let firstNum = '';
+let currentNum = '';
+let answered = false;
 let addFlag = false;
 let subtractFlag  = false;
 let multiplyFlag = false;
 let divideFlag = false;
 let leftBracket = false;
-let maxDisplay = 18;
+let maxDisplay = 12;
 
 
 const root = document.querySelector('.root');
@@ -28,6 +28,11 @@ const plusMinusButton = document.querySelector('.plus-minus')
 const percentButton = document.querySelector('.percent')
 const sqrtButton = document.querySelector('.sqrt')
 const operators = document.querySelectorAll('button.operator')
+const addButton = document.querySelector('.plus');
+const subtractButton = document.querySelector('.minus');
+const divideButton = document.querySelector('.divide');
+const multiplyButton = document.querySelector('.multiply');
+
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -51,72 +56,108 @@ const zoomCalc = () => {
         calculator.classList.toggle('zoomed');
 };
 
+
 const toggleActive = (e) => {
+    //change opacity of selected operator
     operators.forEach(button => {
         if (button.classList.length == 4) {
             button.classList.toggle('active')
         }});
     e.target.classList.toggle('active')
-
 };
 
 const clearDisplay = () => {
-    displayText = ''
-    display.textContent = ''
+    firstNum = '';
+    currentNum = '';
+    display.textContent = '';
 };
 
-const add = (x, y) => {
-    answer = x + y;
+// const checkDisplay = () => {
+//     if (currentNum.length > maxDisplay) {
+//         let eValue = currentNum.slice(maxDisplay).length;
+//         console.log(eValue)
+//     }
+// };
+
+const captureFirstNum = () => { 
+    firstNum = +currentNum;
+};
+
+const add = () => {
+    if (!firstNum) {
+        captureFirstNum();
+    } else {
+        display.textContent = firstNum + +currentNum;
+        firstNum = firstNum + +currentNum;
+    }
+
 };
 
 const subtract = (x, y) => {
-    answer = x - y; 
+    return (x-y).toString();
+ 
 };
 
 const multiply = (x, y) => {
-    answer = x * y;
+    return (x*y).toString();
+
 };
 
 const divide = (x, y) => {
-    answer = x / y;
+    return (x/y).toString();
+
 };
 
 const calculateSqrt = () => {
-    displayText = + displayText;
-    displayText = displayText ** (1/2);
-    displayText = displayText.toString();
+    currentNum = + currentNum;
+    currentNum = currentNum ** (1/2);
+    currentNum = currentNum.toString();
     addToDisplay();
 };
 
 const addDecimal = () => {
-    if(displayText.indexOf('.') != -1) {
+    if(currentNum.indexOf('.') != -1) {
         return
     };
-    displayText += '.';
+    currentNum += '.';
     addToDisplay();
 };
 
 const addToDisplay = () => {
-    display.textContent = displayText;
+    display.textContent = currentNum.slice(0, maxDisplay);
+    if (currentNum.length > maxDisplay) {
+        display.textContent += '..'
+    }
 };
 
 const displayNum = (e) => {
-    displayText += e.target.textContent;
+    if (firstNum) currentNum = '';
+    currentNum += e.target.textContent;
     addToDisplay();
 };
 
 const plusMinus = () => {
-    displayText = +displayText;
-    displayText -= displayText *2;
-    displayText = displayText.toString();
+    currentNum = +currentNum;
+    currentNum -= currentNum *2;
+    currentNum = currentNum.toString();
     addToDisplay();
 };
 
 const calculatePercent = () => {
-    displayText = +displayText;
-    displayText *= .01;
-    displayText = displayText.toString();
+    currentNum = +currentNum;
+    currentNum *= .01;
+    currentNum = currentNum.toString();
     addToDisplay();
+};
+
+const equals = () => {
+
+
+
+
+
+
+
 };
 
 
@@ -149,3 +190,5 @@ sqrtButton.addEventListener('click', calculateSqrt);
 operators.forEach(button => {
     button.addEventListener('click', toggleActive)
 });
+
+addButton.addEventListener('click', add)
