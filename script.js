@@ -25,6 +25,8 @@ const display = document.querySelector('#display')
 const decimalButton = document.querySelector('.decimal')
 const numberButtons = document.querySelectorAll('#number.btn')
 const plusMinusButton = document.querySelector('.plus-minus')
+const percentButton = document.querySelector('.percent')
+
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -97,6 +99,13 @@ const plusMinus = () => {
     addToDisplay();
 };
 
+const calculatePercent = () => {
+    displayText = +displayText;
+    displayText *= .01;
+    displayText = displayText.toString();
+    addToDisplay();
+};
+
 
 
 changeBackgroundButton.addEventListener('click', setColor);
@@ -119,3 +128,5 @@ numberButtons.forEach(button => {
 })
 
 plusMinusButton.addEventListener('click', plusMinus)
+
+percentButton.addEventListener('click', calculatePercent)
