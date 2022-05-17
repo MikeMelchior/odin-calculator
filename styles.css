@@ -44,8 +44,10 @@ body, html {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
             justify-content: space-between;
+            width: 40%;
+            margin-left: auto;
         }
             input[type='color']::-webkit-color-swatch-wrapper {
                 padding: 0;
@@ -57,7 +59,6 @@ body, html {
                 box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 8px;
           }
             #colorPicker {
-                margin-right: 13%;
                 width: 80px;
                 height: 80px;
                 border: none;
@@ -68,7 +69,7 @@ body, html {
             }
 
             .left-section button {
-                width: 40%;
+                width: 100%;
                 padding: 8px 0px;
                 font-size: 1vw;
                 font-weight: bold;
