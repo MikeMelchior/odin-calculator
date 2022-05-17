@@ -26,7 +26,7 @@ const decimalButton = document.querySelector('.decimal')
 const numberButtons = document.querySelectorAll('#number.btn')
 const plusMinusButton = document.querySelector('.plus-minus')
 const percentButton = document.querySelector('.percent')
-
+const sqrtButton = document.querySelector('.sqrt')
 
 const setColor = () => {
     currentColor = colorPicker.value;
@@ -71,12 +71,15 @@ const divide = (x, y) => {
     answer = x / y;
 };
 
-const sqrt = () => {
-    answer = Math.sqrt(x);
+const calculateSqrt = () => {
+    displayText = + displayText;
+    displayText = displayText ** (1/2);
+    displayText = displayText.toString();
+    addToDisplay();
 };
 
 const addDecimal = () => {
-    if(display.textContent.slice(display.textContent.length - 1) == '.') {
+    if(displayText.indexOf('.') != -1) {
         return
     };
     displayText += '.';
@@ -112,21 +115,23 @@ changeBackgroundButton.addEventListener('click', setColor);
 changeBackgroundButton.addEventListener('click', changeBackground);
 
 changeCalcColorButton.addEventListener('click', setColor);
-changeCalcColorButton.addEventListener('click', changeCalcColor)
+changeCalcColorButton.addEventListener('click', changeCalcColor);
 
-changeButtonColorButton.addEventListener('click', setColor)
-changeButtonColorButton.addEventListener('click', changeCalcButtons)
+changeButtonColorButton.addEventListener('click', setColor);
+changeButtonColorButton.addEventListener('click', changeCalcButtons);
 
-zoomButton.addEventListener('click', zoomCalc)
+zoomButton.addEventListener('click', zoomCalc);
 
-clearButton.addEventListener('click', clearDisplay)
+clearButton.addEventListener('click', clearDisplay);
 
-decimalButton.addEventListener('click', addDecimal)
+decimalButton.addEventListener('click', addDecimal);
 
 numberButtons.forEach(button => {
-    button.addEventListener('click', displayNum)
-})
+    button.addEventListener('click', displayNum);
+});
 
-plusMinusButton.addEventListener('click', plusMinus)
+plusMinusButton.addEventListener('click', plusMinus);
 
-percentButton.addEventListener('click', calculatePercent)
+percentButton.addEventListener('click', calculatePercent);
+
+sqrtButton.addEventListener('click', calculateSqrt);
