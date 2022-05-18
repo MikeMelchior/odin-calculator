@@ -1,7 +1,7 @@
 
 let zoom = false;
 let currentColor = null;
-let firstNum = '';
+let prevNum = '';
 let currentNum = '';
 let answered = false;
 let addFlag = false;
@@ -10,6 +10,7 @@ let multiplyFlag = false;
 let divideFlag = false;
 let leftBracket = false;
 let maxDisplay = 12;
+
 
 
 const root = document.querySelector('.root');
@@ -32,6 +33,10 @@ const addButton = document.querySelector('.plus');
 const subtractButton = document.querySelector('.minus');
 const divideButton = document.querySelector('.divide');
 const multiplyButton = document.querySelector('.multiply');
+const equalsButton = document.querySelector('.equals')
+
+
+let ePower = currentNum.slice(maxDisplay).length
 
 
 const setColor = () => {
@@ -66,46 +71,35 @@ const toggleActive = (e) => {
     e.target.classList.toggle('active')
 };
 
+
 const clearDisplay = () => {
-    firstNum = '';
+    addFlag = false;
+    subtractFlag = false;
+    multiplyFlag = false;
+    divideFlag = false;
+    prevNum = '';
     currentNum = '';
     display.textContent = '';
 };
 
-// const checkDisplay = () => {
-//     if (currentNum.length > maxDisplay) {
-//         let eValue = currentNum.slice(maxDisplay).length;
-//         console.log(eValue)
-//     }
-// };
-
-const captureFirstNum = () => { 
-    firstNum = +currentNum;
-};
-
-const add = () => {
-    if (!firstNum) {
-        captureFirstNum();
-    } else {
-        display.textContent = firstNum + +currentNum;
-        firstNum = firstNum + +currentNum;
+const addToDisplay = () => {
+    display.textContent = currentNum;
+    if (display.textContent.length > maxDisplay) {
+        display.textContent = currentNum.slice(0, maxDisplay) + '..' + `e+${ePower}`
     }
-
 };
 
-const subtract = (x, y) => {
-    return (x-y).toString();
- 
+const displayNum = (e) => {
+    currentNum += e.target.textContent;
+    addToDisplay();
 };
 
-const multiply = (x, y) => {
-    return (x*y).toString();
-
-};
-
-const divide = (x, y) => {
-    return (x/y).toString();
-
+const capturePrevNum = () => {
+    if (prevNum === '') {
+        prevNum = currentNum;
+        currentNum = '';
+        return
+    }
 };
 
 const calculateSqrt = () => {
@@ -123,18 +117,6 @@ const addDecimal = () => {
     addToDisplay();
 };
 
-const addToDisplay = () => {
-    display.textContent = currentNum.slice(0, maxDisplay);
-    if (currentNum.length > maxDisplay) {
-        display.textContent += '..'
-    }
-};
-
-const displayNum = (e) => {
-    if (firstNum) currentNum = '';
-    currentNum += e.target.textContent;
-    addToDisplay();
-};
 
 const plusMinus = () => {
     currentNum = +currentNum;
@@ -150,15 +132,108 @@ const calculatePercent = () => {
     addToDisplay();
 };
 
-const equals = () => {
+
+
+const switchFlags = (flag) => {
+    if (flag === 'addFlag') {
+        addFlag = true;
+        subtractFlag = false;
+        multiplyFlag = false;
+        divideFlag = false;
+    } else if (flag === 'subtractFlag') {
+        addFlag = false;
+        subtractFlag = true;
+        multiplyFlag = false;
+        divideFlag = false;
+    } else if (flag === 'multiplyFlag'){
+        addFlag = false;
+        subtractFlag = false;
+        multiplyFlag = true;
+        divideFlag = false;
+    } else if (flag === 'divideFlag'){
+        addFlag = false;
+        subtractFlag = false;
+        multiplyFlag = false;
+        divideFlag = true;
+    } 
+}
 
 
 
-
-
-
-
+const solve = () => {
+    if (addFlag) {
+        currentNum = (+prevNum + +currentNum).toString();
+        addToDisplay();
+        prevNum = currentNum;
+        currentNum = '';
+    } else if (subtractFlag) {
+        currentNum = (+prevNum - +currentNum).toString();
+        addToDisplay();
+        prevNum = currentNum;
+        currentNum = '';
+    } else if (multiplyFlag) {
+        if (currentNum === '') {
+            currentNum = 1;
+        };
+        currentNum = (+prevNum * +currentNum).toString();
+        addToDisplay();
+        prevNum = currentNum;
+        currentNum = '';
+    } else if (divideFlag) {
+        if (currentNum === '') {
+            currentNum = 1;
+        }
+        currentNum = (+prevNum / +currentNum).toString();
+        addToDisplay();
+        prevNum = currentNum;
+        currentNum = '';
+    }
 };
+
+
+const add = () => {
+    if(!addFlag) {
+        solve();
+        switchFlags('addFlag');
+    }
+    capturePrevNum();
+    solve();
+    switchFlags('addFlag');
+};
+
+
+const subtract = () => {
+    if (!subtractFlag) {
+        solve();
+        switchFlags('subtractFlag');
+    }
+    capturePrevNum();
+    solve();
+    switchFlags('subtractFlag');
+};
+
+const multiply = () => {
+    if (!multiplyFlag) {
+        solve();
+        switchFlags('multiplyFlag');
+    }
+    capturePrevNum();
+    solve();
+    switchFlags('multiplyFlag');
+};
+
+const divide = () => {
+    if (!divideFlag) {
+        solve();
+        switchFlags('divideFlag');
+    }
+    capturePrevNum();
+    solve();
+    switchFlags('divideFlag');
+};
+
+
+
 
 
 
@@ -173,13 +248,20 @@ changeButtonColorButton.addEventListener('click', changeCalcButtons);
 
 zoomButton.addEventListener('click', zoomCalc);
 
+operators.forEach(button => {
+    button.addEventListener('click', toggleActive)
+});
+
 clearButton.addEventListener('click', clearDisplay);
 
-decimalButton.addEventListener('click', addDecimal);
 
-numberButtons.forEach(button => {
-    button.addEventListener('click', displayNum);
-});
+
+
+
+
+
+
+decimalButton.addEventListener('click', addDecimal);
 
 plusMinusButton.addEventListener('click', plusMinus);
 
@@ -187,8 +269,23 @@ percentButton.addEventListener('click', calculatePercent);
 
 sqrtButton.addEventListener('click', calculateSqrt);
 
-operators.forEach(button => {
-    button.addEventListener('click', toggleActive)
+
+
+
+
+
+numberButtons.forEach(button => {
+    button.addEventListener('click', displayNum);
 });
 
+equalsButton.addEventListener('click', solve)
+
 addButton.addEventListener('click', add)
+
+subtractButton.addEventListener('click', subtract)
+
+multiplyButton.addEventListener('click', multiply)
+
+divideButton.addEventListener('click', divide)
+
+// have clear remove the active status for opertaors
