@@ -104,9 +104,7 @@ const addToDisplay = () => {
         if(currentNum.length < maxDisplay) {
             display.textContent = currentNum;
             return
-        }
-        display.textContent = currentNum.slice(0, 11) + currentNum.slice(currentNum.indexOf('e'))
-        return
+        }  
     } else if (display.textContent.length > maxDisplay) {
         display.textContent = currentNum.slice(0, maxDisplay) + `e+${currentNum.slice(maxDisplay).length}`
 }};
@@ -218,7 +216,6 @@ const solve = () => {
     divideFlag = false;
 };
 
-
 const add = () => {
     answered = false;
     if(!addFlag) {
@@ -229,7 +226,6 @@ const add = () => {
     solve();
     switchFlags('addFlag');
 };
-
 
 const subtract = () => {
     answered = false;
@@ -263,7 +259,6 @@ const divide = () => {
     solve();
     switchFlags('divideFlag');
 };
-
 
 changeBackgroundButton.addEventListener('click', setColor);
 changeBackgroundButton.addEventListener('click', changeBackground);
