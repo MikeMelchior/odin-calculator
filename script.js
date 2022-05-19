@@ -310,42 +310,52 @@ const useKeyboard = (e) => {
         case 'Numpad0':
             currentNum += 0;            
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad1':
             currentNum += 1;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad2':
             currentNum += 2;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad3':
             currentNum += 3;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad4':
             currentNum += 4;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad5':
             currentNum += 5;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad6': 
             currentNum += 6;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad7':
             currentNum += 7;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad8':
             currentNum += 8;
             addToDisplay();
+            clearAnswered();
             break;
         case 'Numpad9':
             currentNum += 9;
             addToDisplay();
+            clearAnswered();
         default:
             break;
     };
@@ -382,6 +392,7 @@ const useKeyboard = (e) => {
         //numpad '.'
         case 46:
             addDecimal();
+            clearAnswered();
             break;
         // num lk (A/C)
         case 144:
