@@ -34,7 +34,7 @@ const subtractButton = document.querySelector('.minus');
 const divideButton = document.querySelector('.divide');
 const multiplyButton = document.querySelector('.multiply');
 const equalsButton = document.querySelector('.equals')
-
+const undoButton = document.querySelector('.undo')
 
 let ePower = currentNum.slice(maxDisplay).length
 
@@ -80,6 +80,11 @@ const clearDisplay = () => {
     prevNum = '';
     currentNum = '';
     display.textContent = '';
+};
+
+const undo = () => {
+    currentNum = currentNum.slice(0, currentNum.length-1);
+    addToDisplay();
 };
 
 // const addToDisplay = () => {
@@ -293,3 +298,102 @@ multiplyButton.addEventListener('click', multiply);
 divideButton.addEventListener('click', divide);
 
 // have clear remove the active status for operators
+
+undoButton.addEventListener('click', undo)
+
+
+
+const useKeyboard = (e) => {
+    switch (e.code) {
+        case 'Numpad0':
+            currentNum += 0;            
+            addToDisplay();
+            break;
+        case 'Numpad1':
+            currentNum += 1;
+            addToDisplay();
+            break;
+        case 'Numpad2':
+            currentNum += 2;
+            addToDisplay();
+            break;
+        case 'Numpad3':
+            currentNum += 3;
+            addToDisplay();
+            break;
+        case 'Numpad4':
+            currentNum += 4;
+            addToDisplay();
+            break;
+        case 'Numpad5':
+            currentNum += 5;
+            addToDisplay();
+            break;
+        case 'Numpad6': 
+            currentNum += 6;
+            addToDisplay();
+            break;
+        case 'Numpad7':
+            currentNum += 7;
+            addToDisplay();
+            break;
+        case 'Numpad8':
+            currentNum += 8;
+            addToDisplay();
+            break;
+        case 'Numpad9':
+            currentNum += 9;
+            addToDisplay();
+        default:
+            break;
+    };
+    console.log(e.keyCode)
+    switch (e.keyCode) {
+        case 13:
+            solve();
+            break;
+        case 107:
+            add();
+            break;
+        case 109:
+            subtract();
+            break;
+        case 106:
+            multiply();
+            break;
+        case 111:
+            divide();
+            break;
+        case 46:
+            addDecimal();
+            break;
+        case 144:
+            clearDisplay();
+            break;
+        case 187:
+            calculateSqrt();
+            break;
+        case 189:
+            calculatePercent();
+            break;
+        case 48:
+            plusMinus();
+            break;
+        case 8:
+            undo();
+            break;
+        default:
+            break;
+    }
+
+
+}
+document.addEventListener('keydown', useKeyboard)
+
+
+
+
+// const displayNum = (e) => {
+//     currentNum += e.target.textContent;
+//     addToDisplay();
+// };
