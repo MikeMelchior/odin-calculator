@@ -63,7 +63,12 @@ const toggleActive = (e) => {
         if (button.classList.length == 4) {
             button.classList.toggle('active')
         }});
-    e.target.classList.toggle('active')
+    try {
+        e.target.classList.toggle('active')
+    }
+    catch {
+        console.log('error: numpad e.target is body')
+    }
 };
 
 const removeActive = () => {
@@ -271,7 +276,7 @@ changeButtonColorButton.addEventListener('click', changeCalcButtons);
 
 zoomButton.addEventListener('click', zoomCalc);
 
-operators.forEach(button => {
+const toggler = operators.forEach(button => {
     button.addEventListener('click', toggleActive)
 });
 
@@ -350,36 +355,56 @@ const useKeyboard = (e) => {
             break;
     };
     switch (e.keyCode) {
+        // enter button (equals)
         case 13:
+            removeActive();
             solve();
             break;
+        // numpad '+' 
         case 107:
+            toggleActive();
+            document.querySelector('.plus').classList.add('active');
             add();
             break;
+        // numpad '-'
         case 109:
+            toggleActive();
+            document.querySelector('.minus').classList.add('active');
             subtract();
             break;
+        // numpad '*'
         case 106:
+            toggleActive();
+            document.querySelector('.multiply').classList.add('active');
             multiply();
             break;
+        // numpad '/'
         case 111:
+            toggleActive();
+            document.querySelector('.divide').classList.add('active');
             divide();
             break;
+        //numpad '.'
         case 46:
             addDecimal();
             break;
+        // num lk (A/C)
         case 144:
             clearDisplay();
             break;
+        // '+/=' button, (calc sqrt)
         case 187:
             calculateSqrt();
             break;
+        // '-/_' button (calc percent)
         case 189:
             calculatePercent();
             break;
+        // ')/0' button (positive/negative)
         case 48:
             plusMinus();
             break;
+        // backspace (undo)
         case 8:
             undo();
             break;
