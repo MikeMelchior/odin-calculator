@@ -88,9 +88,18 @@ body, html {
     .calculator-area {
         flex: 2;
         display: flex;
-        justify-content: center;
-        align-items: flex-end;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
     }
+        button.undo {
+            width: 15%;
+            height: 8%;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .calculator {
             display: flex;
             justify-content: center;
