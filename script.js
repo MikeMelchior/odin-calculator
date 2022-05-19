@@ -82,9 +82,19 @@ const clearDisplay = () => {
     display.textContent = '';
 };
 
+// const addToDisplay = () => {
+//     display.textContent = currentNum;
+//     if (display.textContent.length > maxDisplay) {
+//         display.textContent = currentNum.slice(0, maxDisplay) + '..' + `e+${ePower}`
+//     }
+// };
+
 const addToDisplay = () => {
     display.textContent = currentNum;
-    if (display.textContent.length > maxDisplay) {
+    if (currentNum.indexOf('e') != -1) {
+        display.textContent = currentNum.slice(0, 11) + currentNum.slice(currentNum.indexOf('e'))
+        return
+    } else if (display.textContent.length > maxDisplay) {
         display.textContent = currentNum.slice(0, maxDisplay) + '..' + `e+${ePower}`
     }
 };
@@ -255,12 +265,6 @@ operators.forEach(button => {
 clearButton.addEventListener('click', clearDisplay);
 
 
-
-
-
-
-
-
 decimalButton.addEventListener('click', addDecimal);
 
 plusMinusButton.addEventListener('click', plusMinus);
@@ -278,14 +282,14 @@ numberButtons.forEach(button => {
     button.addEventListener('click', displayNum);
 });
 
-equalsButton.addEventListener('click', solve)
+equalsButton.addEventListener('click', solve);
 
-addButton.addEventListener('click', add)
+addButton.addEventListener('click', add);
 
-subtractButton.addEventListener('click', subtract)
+subtractButton.addEventListener('click', subtract);
 
-multiplyButton.addEventListener('click', multiply)
+multiplyButton.addEventListener('click', multiply);
 
-divideButton.addEventListener('click', divide)
+divideButton.addEventListener('click', divide);
 
-// have clear remove the active status for opertaors
+// have clear remove the active status for operators
