@@ -89,17 +89,10 @@ body, html {
         flex: 2;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: center;
     }
-        button.undo {
-            width: 15%;
-            height: 8%;
-            font-size: 1.2em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        
         .calculator {
             display: flex;
             justify-content: center;
@@ -168,7 +161,20 @@ body, html {
 
     .right-section {
         flex: 1;
+        display: flex;
+        align-items: center;
     }
+        button.undo {
+            width: 30%;
+            height: 15%;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1c092e;
+            border-radius: 5px;
+            border: 2px solid black;
+        }
 
 .footer {
     flex: 1;
