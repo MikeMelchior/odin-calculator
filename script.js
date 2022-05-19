@@ -71,6 +71,12 @@ const removeActive = () => {
         operator.classList.remove('active');
 })};
 
+const clearAnswered = () => {
+    if (answered && !addFlag && !subtractFlag && !multiplyFlag && !divideFlag) {
+        prevNum = '';
+        answered = false;
+}};
+
 const clearDisplay = () => {
     addFlag = false;
     subtractFlag = false;
@@ -120,6 +126,7 @@ const calculateSqrt = () => {
 };
 
 const addDecimal = () => {
+    clearAnswered();
     if(currentNum.indexOf('.') != -1) {
         return
     };
@@ -166,16 +173,19 @@ const switchFlags = (flag) => {
 
 const solve = () => {
     if (addFlag) {
+        answered = true;
         currentNum = (+prevNum + +currentNum).toString();
         addToDisplay();
         prevNum = currentNum;
         currentNum = '';
     } else if (subtractFlag) {
+        answered = true;
         currentNum = (+prevNum - +currentNum).toString();
         addToDisplay();
         prevNum = currentNum;
         currentNum = '';
     } else if (multiplyFlag) {
+        answered = true;
         if (currentNum === '') {
             currentNum = 1;
         };
@@ -184,6 +194,7 @@ const solve = () => {
         prevNum = currentNum;
         currentNum = '';
     } else if (divideFlag) {
+        answered = true;
         if (currentNum === '') {
             currentNum = 1;
         } else if (currentNum === '0') {
@@ -196,11 +207,15 @@ const solve = () => {
         prevNum = currentNum;
         currentNum = '';
     }
-    removeActive();
+    addFlag = false;
+    subtractFlag = false;
+    multiplyFlag = false;
+    divideFlag = false;
 };
 
 
 const add = () => {
+    answered = false;
     if(!addFlag) {
         solve();
         switchFlags('addFlag');
@@ -212,6 +227,7 @@ const add = () => {
 
 
 const subtract = () => {
+    answered = false;
     if (!subtractFlag) {
         solve();
         switchFlags('subtractFlag');
@@ -222,6 +238,7 @@ const subtract = () => {
 };
 
 const multiply = () => {
+    answered = false;
     if (!multiplyFlag) {
         solve();
         switchFlags('multiplyFlag');
@@ -232,6 +249,7 @@ const multiply = () => {
 };
 
 const divide = () => {
+    answered = false;
     if (!divideFlag) {
         solve();
         switchFlags('divideFlag');
@@ -269,8 +287,10 @@ sqrtButton.addEventListener('click', calculateSqrt);
 
 numberButtons.forEach(button => {
     button.addEventListener('click', displayNum);
+    button.addEventListener('click', clearAnswered);
 });
 
+equalsButton.addEventListener('click', removeActive);
 equalsButton.addEventListener('click', solve);
 
 addButton.addEventListener('click', add);
