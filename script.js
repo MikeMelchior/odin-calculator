@@ -1,4 +1,3 @@
-
 let zoom = false;
 let currentColor = null;
 let prevNum = '';
@@ -12,7 +11,6 @@ let leftBracket = false;
 let maxDisplay = 12;
 
 
-
 const root = document.querySelector('.root');
 const colorPicker = document.querySelector('#colorPicker');
 const changeBackgroundButton = document.querySelector('#change-background');
@@ -21,22 +19,20 @@ const changeCalcColorButton = document.querySelector('#change-calc-color');
 const calcButtons = document.querySelectorAll('.column button');
 const changeButtonColorButton = document.querySelector('#change-button-color');
 const zoomButton = document.querySelector('#zoom');
-const clearButton = document.querySelector('.clear')
-const display = document.querySelector('#display')
-const decimalButton = document.querySelector('.decimal')
-const numberButtons = document.querySelectorAll('#number.btn')
-const plusMinusButton = document.querySelector('.plus-minus')
-const percentButton = document.querySelector('.percent')
-const sqrtButton = document.querySelector('.sqrt')
-const operators = document.querySelectorAll('button.operator')
+const clearButton = document.querySelector('.clear');
+const display = document.querySelector('#display');
+const decimalButton = document.querySelector('.decimal');
+const numberButtons = document.querySelectorAll('#number.btn');
+const plusMinusButton = document.querySelector('.plus-minus');
+const percentButton = document.querySelector('.percent');
+const sqrtButton = document.querySelector('.sqrt');
+const operators = document.querySelectorAll('button.operator');
 const addButton = document.querySelector('.plus');
 const subtractButton = document.querySelector('.minus');
 const divideButton = document.querySelector('.divide');
 const multiplyButton = document.querySelector('.multiply');
-const equalsButton = document.querySelector('.equals')
-const undoButton = document.querySelector('.undo')
-
-let ePower = currentNum.slice(maxDisplay).length
+const equalsButton = document.querySelector('.equals');
+const undoButton = document.querySelector('.undo');
 
 
 const setColor = () => {
@@ -61,7 +57,6 @@ const zoomCalc = () => {
         calculator.classList.toggle('zoomed');
 };
 
-
 const toggleActive = (e) => {
     //change opacity of selected operator
     operators.forEach(button => {
@@ -71,6 +66,10 @@ const toggleActive = (e) => {
     e.target.classList.toggle('active')
 };
 
+const removeActive = () => {
+    operators.forEach(operator => {
+        operator.classList.remove('active');
+})};
 
 const clearDisplay = () => {
     addFlag = false;
@@ -80,6 +79,7 @@ const clearDisplay = () => {
     prevNum = '';
     currentNum = '';
     display.textContent = '';
+    removeActive();
 };
 
 const undo = () => {
@@ -87,22 +87,18 @@ const undo = () => {
     addToDisplay();
 };
 
-// const addToDisplay = () => {
-//     display.textContent = currentNum;
-//     if (display.textContent.length > maxDisplay) {
-//         display.textContent = currentNum.slice(0, maxDisplay) + '..' + `e+${ePower}`
-//     }
-// };
-
 const addToDisplay = () => {
     display.textContent = currentNum;
     if (currentNum.indexOf('e') != -1) {
+        if(currentNum.length < maxDisplay) {
+            display.textContent = currentNum;
+            return
+        }
         display.textContent = currentNum.slice(0, 11) + currentNum.slice(currentNum.indexOf('e'))
         return
     } else if (display.textContent.length > maxDisplay) {
-        display.textContent = currentNum.slice(0, maxDisplay) + '..' + `e+${ePower}`
-    }
-};
+        display.textContent = currentNum.slice(0, maxDisplay) + `e+${currentNum.slice(maxDisplay).length}`
+}};
 
 const displayNum = (e) => {
     currentNum += e.target.textContent;
@@ -114,8 +110,7 @@ const capturePrevNum = () => {
         prevNum = currentNum;
         currentNum = '';
         return
-    }
-};
+}};
 
 const calculateSqrt = () => {
     currentNum = + currentNum;
@@ -132,7 +127,6 @@ const addDecimal = () => {
     addToDisplay();
 };
 
-
 const plusMinus = () => {
     currentNum = +currentNum;
     currentNum = -currentNum
@@ -146,8 +140,6 @@ const calculatePercent = () => {
     currentNum = currentNum.toString();
     addToDisplay();
 };
-
-
 
 const switchFlags = (flag) => {
     if (flag === 'addFlag') {
@@ -170,10 +162,7 @@ const switchFlags = (flag) => {
         subtractFlag = false;
         multiplyFlag = false;
         divideFlag = true;
-    } 
-}
-
-
+}};
 
 const solve = () => {
     if (addFlag) {
@@ -197,12 +186,17 @@ const solve = () => {
     } else if (divideFlag) {
         if (currentNum === '') {
             currentNum = 1;
+        } else if (currentNum === '0') {
+            clearDisplay();
+            display.textContent = "you can't do that";
+            return;
         }
         currentNum = (+prevNum / +currentNum).toString();
         addToDisplay();
         prevNum = currentNum;
         currentNum = '';
     }
+    removeActive();
 };
 
 
@@ -248,10 +242,6 @@ const divide = () => {
 };
 
 
-
-
-
-
 changeBackgroundButton.addEventListener('click', setColor);
 changeBackgroundButton.addEventListener('click', changeBackground);
 
@@ -269,7 +259,6 @@ operators.forEach(button => {
 
 clearButton.addEventListener('click', clearDisplay);
 
-
 decimalButton.addEventListener('click', addDecimal);
 
 plusMinusButton.addEventListener('click', plusMinus);
@@ -277,11 +266,6 @@ plusMinusButton.addEventListener('click', plusMinus);
 percentButton.addEventListener('click', calculatePercent);
 
 sqrtButton.addEventListener('click', calculateSqrt);
-
-
-
-
-
 
 numberButtons.forEach(button => {
     button.addEventListener('click', displayNum);
@@ -300,8 +284,6 @@ divideButton.addEventListener('click', divide);
 // have clear remove the active status for operators
 
 undoButton.addEventListener('click', undo)
-
-
 
 const useKeyboard = (e) => {
     switch (e.code) {
@@ -347,7 +329,6 @@ const useKeyboard = (e) => {
         default:
             break;
     };
-    console.log(e.keyCode)
     switch (e.keyCode) {
         case 13:
             solve();
@@ -384,16 +365,6 @@ const useKeyboard = (e) => {
             break;
         default:
             break;
-    }
+}};
 
-
-}
-document.addEventListener('keydown', useKeyboard)
-
-
-
-
-// const displayNum = (e) => {
-//     currentNum += e.target.textContent;
-//     addToDisplay();
-// };
+document.addEventListener('keydown', useKeyboard);
